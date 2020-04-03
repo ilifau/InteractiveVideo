@@ -49,7 +49,6 @@ il.InteractiveVideoPlayerFunction = (function (scope) {
 		scope.InteractiveVideoPlayerResume.saveResumeTime(player_id);
 
 		if (!isNaN(current_time) && current_time > 0) {
-
 			pri.utils.clearCommentsWhereTimeEndEndded(player_id, current_time);
 			for (j = player_data.stopPoints.length - 1; j >= 0; j--)
 			{
@@ -74,7 +73,7 @@ il.InteractiveVideoPlayerFunction = (function (scope) {
 					player_data.last_stopPoint = cueTime;
 				}
 			}
-			player_data.last_time = current_time;
+			player_data.last_time = parseInt(current_time, 10);
 		}
 	};
 
@@ -241,7 +240,7 @@ il.InteractiveVideoPlayerFunction = (function (scope) {
 				success:  function () {
 					$('.reply_comment_' + org_id).remove();
 					$('.list_item_' + comment_id + ' .reply_comment_non_existent').remove();
-					var reply = {'comment_text' : comment_text, 'is_interactive' : 0, 'is_private' : is_private, 'user_name' :scope.InteractiveVideo.username, 'comment_id' : 'non_existent'};
+					var reply = {'comment_text' : comment_text, 'is_interactive' : 0, 'is_private' : is_private, 'user_name' : scope.InteractiveVideo[player_id].username, 'comment_id' : 'non_existent'};
 					var html = scope.InteractiveVideoPlayerComments.getCommentRepliesHtml(reply);
 					$('.list_item_' + comment_id).find('.comment_replies').append(html);
 					$('#ilQuestionModal').modal('hide');
@@ -462,8 +461,26 @@ il.InteractiveVideoPlayerFunction = (function (scope) {
 			}
 		}
 
+		//Youtube
+		if(typeof player.getIframe !== "undefined"){
+			let iframe_id = $(player.getIframe()).attr('id');
+			if(iframe_id !== undefined){
+				return iframe_id;
+			}
+		}
+
+		//Youtube
+		if(player.hasOwnProperty("f")){
+			if(player.f.id !== undefined) {
+				return player.f.id;
+			}
+		}
+
+		//Youtube
 		if(player.hasOwnProperty("i")){
+			if(player.i.id !== undefined) {
 				return player.i.id;
+			}
 		}
 	};
 
