@@ -61,6 +61,9 @@ class ilInteractiveVideoMediaObjectGUI implements ilInteractiveVideoSourceGUI
 		$media_item = ilMediaItem::_getMediaItemsOfMObId($mob_id, 'Standard');
 
 		$player->setVariable('PLAYER_ID', $player_id);
+        // fau: webAccessChecker - increase max lifetime of web access checker tokens
+        ilWACSignedPath::setTokenMaxLifetimeInSeconds('7200');
+        // fau.
 		$player->setVariable('VIDEO_SRC', ilWACSignedPath::signFile($mob_dir . '/' . $media_item['location']));
 		$player->setVariable('VIDEO_TYPE', $media_item['format']);
 		return $player;
