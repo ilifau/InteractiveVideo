@@ -49,6 +49,9 @@ class ilObjInteractiveVideoListGUI extends ilObjectPluginListGUI
 	public function initType()
 	{
 		$this->setType('xvid');
+		// fau: fixMissingCopyOperation - add the copy operation to the actions menu
+        $this->copy_enabled = true;
+        // fau.
 	}
 
 	/**
