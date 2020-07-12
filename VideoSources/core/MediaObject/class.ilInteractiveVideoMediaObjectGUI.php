@@ -40,7 +40,9 @@ class ilInteractiveVideoMediaObjectGUI implements ilInteractiveVideoSourceGUI
 	public function addPlayerElements($tpl)
 	{
 		$tpl->addJavaScript(self::PATH . 'js/jquery.InteractiveVideoMediaElementPlayer.js');
-		ilPlayerUtil::initMediaElementJs($tpl);
+        // fau: jumpMedia - prevent custom player for interactive video
+		ilPlayerUtil::initMediaElementJs($tpl, false);
+		// fau.
 		return $tpl;
 	}
 
