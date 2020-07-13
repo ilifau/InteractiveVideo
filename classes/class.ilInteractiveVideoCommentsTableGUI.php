@@ -124,9 +124,7 @@ class ilInteractiveVideoCommentsTableGUI extends ilTable2GUI
 	 */
 	protected function fillRow($a_set)
 	{
-	    // fau: fixIvQuestionListEditor - show questions to other authors
         if($this->isPublic() == 0 && $this->DIC->user()->getId() != $a_set['user_id'] && !$a_set['is_interactive']) {
-            // fau.
             $this->tpl->setCurrentBlock('no_row');
             $this->tpl->setVariable('VAL_SPACE', '-');
             $this->tpl->parseCurrentBlock();
