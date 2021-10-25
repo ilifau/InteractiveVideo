@@ -544,8 +544,10 @@ class ilObjInteractiveVideoGUI extends ilObjectPluginGUI implements ilDesktopIte
 		$image_cache = array();
 		if( ! $edit_screen)
 		{
-			$stop_points = $this->objComment->getStopPoints();
-			$comments    = $this->objComment->getContentComments();
+            $stop_points = $this->objComment->getStopPoints();
+            try { $comments    = $this->objComment->getContentComments();}
+            catch (Exception $e) { $comments = ''; }
+
 			$image_cache = ilObjComment::getUserImageCache();
 		}
 
