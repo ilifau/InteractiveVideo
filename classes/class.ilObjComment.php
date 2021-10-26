@@ -311,10 +311,9 @@ class ilObjComment
                     $temp['user_id']	= $row['user_id'];
                 }
                 catch (Exception $e) {
-                    $this->setIsAnonymized(true);
-                    ilLoggerFactory::getLogger('xvid')->error('User for Comment in Interactive Video, could not be found; user set to anonymous user');
+                    ilLoggerFactory::getLogger('xvid')->debug('User for Comment in Interactive Video, could not be found; user set to anonymous user');
                 }
-                //fau
+                //fau.
 			}
 			$temp['comment_title'] 		= $row['comment_title'];
 			if($row['is_interactive'] == 1)
