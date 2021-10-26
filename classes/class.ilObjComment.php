@@ -304,9 +304,17 @@ class ilObjComment
 			$temp['user_name'] = '';
 			if(!$this->isAnonymized())
 			{
-				$temp['user_name']	= self::lookupUsername($row['user_id']);
-				self::getUserImageInBase64($row['user_id']);
-				$temp['user_id']	= $row['user_id'];
+                //fau: fixIvDeletedUserComment – fault tolerance if comment user is deleted
+                try {
+                    $temp['user_name']	= self::lookupUsername($row['user_id']);
+                    self::getUserImageInBase64($row['user_id']);
+                    $temp['user_id']	= $row['user_id'];
+                }
+                catch (Exception $e) {
+                    $this->setIsAnonymized(true);
+                    ilLoggerFactory::getLogger('xvid')->error('User for Comment in Interactive Video, could not be found; user set to anonymous user');
+                }
+                //fau
 			}
 			$temp['comment_title'] 		= $row['comment_title'];
 			if($row['is_interactive'] == 1)
