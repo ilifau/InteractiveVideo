@@ -40,7 +40,11 @@ class ilInteractiveVideoDbUpdater extends ilPluginDBUpdate
 	 */
 	public function __construct($a_db_handler = 0, $tmp_flag = false)
 	{
+		/**
+		 * @var $ilDB ilDB
+		 */
 		global $ilDB;
+
 		$this->db = $ilDB;
 		$this->collectUpdateFiles();
 		$this->iterateThroughUpdateFiles();
@@ -150,7 +154,7 @@ class ilInteractiveVideoDbUpdater extends ilPluginDBUpdate
 			$this->readLastUpdateFile();
 			$version = $this->readFileVersion();
 			$return_value = $this->applyUpdate();
-			if($return_value)
+            if(is_null($return_value) || $return_value === true)
 			{
 				$this->setCurrentVersion($version);
 			}
