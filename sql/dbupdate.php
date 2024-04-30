@@ -981,120 +981,13 @@ if(!$ilDB->tableColumnExists('rep_robj_xvid_objects', 'no_comment_stream'))
 ?>
 <#65>
 <?php
-// Empty step
-?>
-<#47>
-<?php
-// Empty step
-?>
-<#48>
-<?php
-// Empty step
-?>
-<#49>
-<?php
-// Empty step
-?>
-<#50>
-<?php
-// Empty step
-?>
-<#51>
-<?php
-// Empty step
-?>
-<#52>
-<?php
-// Empty step
-?>
-<#53>
-<?php
-// Empty step
-?>
-<#54>
-<?php
-// Empty step
-?>
-<#55>
-<?php
-// Empty step
-?>
-<#56>
-<?php
-// Empty step
-?>
-<#57>
-<?php
-// Empty step
-?>
-<#58>
-<?php
-// Empty step
-?>
-<#59>
-<?php
-// Empty step
-?>
-<#60>
-	<?php
-	if(!$ilDB->tableColumnExists('rep_robj_xvid_objects', 'video_mode'))
-	{
-	}
-	?>
-<#61>
-<?php
-if(!$ilDB->tableColumnExists('rep_robj_xvid_objects', 'video_mode'))
-{
-	$ilDB->addTableColumn('rep_robj_xvid_objects', 'video_mode',
-		array(
-			'type'    => 'integer',
-			'length'  => '1',
-			'notnull' => true,
-			'default' => 0));
+require_once('./Services/Migration/DBUpdate_3560/classes/class.ilDBUpdateNewObjectType.php');
+$read_lp = ilDBUpdateNewObjectType::getCustomRBACOperationId('read_learning_progress');
+$xoct_type_id = ilDBUpdateNewObjectType::getObjectTypeId('xvid');
+
+if ($read_lp && $xoct_type_id) {
+	ilDBUpdateNewObjectType::addRBACOperation($xoct_type_id, $read_lp);
 }
-?>
-<#62>
-<?php
-if($ilDB->tableExists('rep_robj_xvid_comments'))
-{
-	if(!$ilDB->tableColumnExists('rep_robj_xvid_comments', 'marker'))
-	{
-		$ilDB->addTableColumn('rep_robj_xvid_comments', 'marker',
-			array(
-				'type' => 'text',
-				'length' => '4000',
-				'notnull' => false
-			));
-	}
-}
-?>
-<#63>
-<?php
-if(!$ilDB->tableColumnExists('rep_robj_xvid_objects', 'marker_for_students'))
-{
-	$ilDB->addTableColumn('rep_robj_xvid_objects', 'marker_for_students',
-		array(
-			'type'    => 'integer',
-			'length'  => '1',
-			'notnull' => true,
-			'default' => 0));
-}
-?>
-<#64>
-<?php
-if(!$ilDB->tableColumnExists('rep_robj_xvid_objects', 'no_comment_stream'))
-{
-	$ilDB->addTableColumn('rep_robj_xvid_objects', 'no_comment_stream',
-		array(
-			'type'    => 'integer',
-			'length'  => '1',
-			'notnull' => true,
-			'default' => 0));
-}
-?>
-<#65>
-<?php
-// Empty step
 ?>
 <#66>
 <?php
