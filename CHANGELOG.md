@@ -1,3 +1,10 @@
+# Unreleased
+1. YouTube consent ("two-click" solution): YouTube videos are no longer embedded
+   automatically. A neutral placeholder with a data-protection notice and a consent
+   button is shown first; only after the user agrees is the player loaded in place
+   (no reload). Consent is stored per browser (localStorage) and applies to all
+   YouTube videos. No request reaches YouTube/Google before consent.
+
 # 3.9.5
 1. Compatibility with ILIAS 9.0
 2. Refactored results tables and usage of the new table ui structure

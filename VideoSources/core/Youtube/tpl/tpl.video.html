@@ -23,6 +23,48 @@
 	.ilInteractiveVideoPlayerContainer {
 		text-align: center;
 	}
+	/* YouTube consent ("two-click") overlay: nothing is loaded from YouTube
+	   until the user actively agrees. */
+	.iv_youtube_consent {
+		position: relative;
+		width: 100%;
+		padding-bottom: 56.25%;
+		background: #1a1a1a;
+		color: #fff;
+		border-radius: 4px;
+		overflow: hidden;
+	}
+	.iv_youtube_consent_inner {
+		position: absolute;
+		top: 0; left: 0; right: 0; bottom: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding: 1.5em;
+		box-sizing: border-box;
+	}
+	.iv_youtube_consent_icon {
+		font-size: 3em;
+		line-height: 1;
+		margin-bottom: .3em;
+		opacity: .85;
+	}
+	.iv_youtube_consent_title {
+		font-size: 1.25em;
+		font-weight: bold;
+		margin-bottom: .5em;
+	}
+	.iv_youtube_consent_text {
+		max-width: 640px;
+		font-size: .95em;
+		line-height: 1.45;
+		margin-bottom: 1.2em;
+		opacity: .9;
+	}
+	.iv_youtube_consent_text a { color: #8ab4f8; }
+	.iv_youtube_consent_hidden { display: none !important; }
 </style>
 <script>
 	var interactiveVideoYoutubeId = "{YOUTUBE_ID}";
@@ -30,7 +72,15 @@
 <!-- TODO: fix marker editing -->
 <div>
 	<div id="ilInteractiveVideoTag"></div>
-	<div class="iv_metadata" data-plyr-player-id="{PLAYER_ID}">
+	<div id="iv_youtube_consent_{PLAYER_ID}" class="iv_youtube_consent" data-consent-player="{PLAYER_ID}">
+		<div class="iv_youtube_consent_inner">
+			<div class="iv_youtube_consent_icon" aria-hidden="true">&#9658;</div>
+			<div class="iv_youtube_consent_title">{CONSENT_TITLE}</div>
+			<div class="iv_youtube_consent_text">{CONSENT_TEXT}</div>
+			<button type="button" class="btn btn-primary iv_youtube_consent_btn" data-consent-player="{PLAYER_ID}">{CONSENT_BUTTON}</button>
+		</div>
+	</div>
+	<div class="iv_metadata iv_youtube_consent_hidden" data-plyr-player-id="{PLAYER_ID}">
 		<div id="{PLAYER_ID}" class="ilInteractiveVideo" data-plyr-provider="youtube" data-plyr-embed-id="{YOUTUBE_ID}"></div>
 	</div>
 

@@ -317,3 +317,6 @@ neutral_string#:#(neutral)
 answered#:#Beantwortet
 opc_selection_current#:#Aktuell ausgewähltes Video
 opc_selection#:#Bestehendes Video aus Opencast Video auswählen
+youtube_consent_title#:#Externes Video von YouTube
+youtube_consent_text#:#Dieses Video wird von YouTube (Google) eingebettet. Wenn Sie zustimmen, wird eine Verbindung zu den Servern von YouTube hergestellt und es können personenbezogene Daten (z. B. Ihre IP-Adresse) an Google übertragen sowie Cookies gesetzt werden. Ihre Zustimmung wird in diesem Browser gespeichert und gilt für alle YouTube-Videos, bis Sie sie zurücknehmen.
+youtube_consent_button#:#YouTube-Video laden

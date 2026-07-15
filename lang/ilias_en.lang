@@ -302,3 +302,6 @@ neutral_string#:#(neutral)
 answered#:#Answered
 opc_selection_current#:#Selected Video
 opc_selection#:#Select existing video from Opencast
+youtube_consent_title#:#External video from YouTube
+youtube_consent_text#:#This video is embedded from YouTube (Google). If you agree, a connection to YouTube's servers is established, personal data (e.g. your IP address) may be transferred to Google and cookies may be set. Your consent is stored in this browser and applies to all YouTube videos until you revoke it.
+youtube_consent_button#:#Load YouTube video

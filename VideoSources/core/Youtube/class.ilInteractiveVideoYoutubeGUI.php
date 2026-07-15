@@ -63,9 +63,13 @@ class ilInteractiveVideoYoutubeGUI implements ilInteractiveVideoSourceGUI
 	{
 		$player = new ilTemplate(self::PATH . 'tpl/tpl.video.html', false, false);
 		$instance = new ilInteractiveVideoYoutube();
+		$plugin = ilInteractiveVideoPlugin::getInstance();
 		$player->setVariable('PLAYER_ID', $player_id);
 		$player->setVariable('YOUTUBE_ID', $instance->doReadVideoSource($obj->getId()));
 		$player->setVariable('INTERACTIVE_VIDEO_ID', $obj->getId());
+		$player->setVariable('CONSENT_TITLE', $plugin->txt('youtube_consent_title'));
+		$player->setVariable('CONSENT_TEXT', $plugin->txt('youtube_consent_text'));
+		$player->setVariable('CONSENT_BUTTON', $plugin->txt('youtube_consent_button'));
 		return $player;
 	}
 
