@@ -7,6 +7,9 @@
 2. Hardening of the YouTube consent flow: guard against double player
    initialisation (double-click), null-safe currentTime accessor, and cleanup
    of the consent overlay in the tutor comment/marker/chapter modals.
+3. YouTube consent overlay is now responsive: it keeps a 16:9 look on wide
+   layouts but grows in height on narrow containers so the consent button is
+   no longer clipped.
 
 # 3.9.5
 1. Compatibility with ILIAS 9.0
