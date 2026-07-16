@@ -28,21 +28,25 @@
 	   grows in height when the container gets too narrow, so the button never
 	   gets clipped. */
 	.iv_youtube_consent {
-		position: relative;
+		display: grid;
 		width: 100%;
-		aspect-ratio: 16 / 9;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		background: #1a1a1a;
 		color: #fff;
 		border-radius: 4px;
+		overflow: hidden;
+	}
+	/* Spacer reserves a 16:9 MINIMUM height; because it shares the single grid
+	   cell with the content, the row grows to whichever is taller — so the
+	   button is never clipped when the container is narrow. */
+	.iv_youtube_consent::before {
+		content: "";
+		grid-area: 1 / 1 / 2 / 2;
+		padding-bottom: 56.25%;
 	}
 	.iv_youtube_consent_inner {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+		grid-area: 1 / 1 / 2 / 2;
+		align-self: center;
+		justify-self: center;
 		text-align: center;
 		max-width: 640px;
 		padding: 1.25em;
@@ -66,7 +70,6 @@
 		opacity: .9;
 	}
 	.iv_youtube_consent_text a { color: #8ab4f8; }
-	.iv_youtube_consent_btn { flex: none; }
 	.iv_youtube_consent_hidden { display: none !important; }
 	/* Very narrow containers: drop the icon and tighten spacing so the
 	   notice + button stay compact. */
