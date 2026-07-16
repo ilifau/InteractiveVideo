@@ -14,6 +14,7 @@ il.InteractiveVideoModalHelper = (function (scope) {
 		).then(function (html) {
 			$('#' + player_id).remove();
 			$('.iv_metadata').remove();
+			$('.iv_youtube_consent').remove();
 			$('#ilInteractiveVideoAjaxModal').find('.modal-body').html(html);
 			il.InteractiveVideoPlayerAbstract.initPlayer(player_id);
 			il.InteractiveVideoOverlayMarker.checkForOverlay()
@@ -33,6 +34,7 @@ il.InteractiveVideoModalHelper = (function (scope) {
 			}, 480);
 			$('#ilInteractiveVideoAjaxModal').on('hidden.bs.modal', function () {
 				$('#ilInteractiveVideoAjaxModal .ilInteractiveVideo').remove();
+				$('#ilInteractiveVideoAjaxModal .iv_youtube_consent').remove();
 				il.InteractiveVideoOverlayMarker.checkForOverlay();
 			})
 		});
@@ -62,6 +64,7 @@ il.InteractiveVideoModalHelper = (function (scope) {
 			}, 480);
 			$('#ilInteractiveVideoAjaxModal').on('hidden.bs.modal', function () {
 				$('#ilInteractiveVideoAjaxModal .ilInteractiveVideo').remove();
+				$('#ilInteractiveVideoAjaxModal .iv_youtube_consent').remove();
 				il.InteractiveVideoOverlayMarker.checkForOverlay();
 			})
 		});

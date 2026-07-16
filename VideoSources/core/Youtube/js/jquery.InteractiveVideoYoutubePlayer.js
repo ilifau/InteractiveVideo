@@ -29,13 +29,21 @@ il.InteractiveVideoYoutubePlayer = (function (scope) {
 			return;
 		}
 
+		// Guard against a second `new Plyr()` on the same node (e.g. double-click
+		// on the consent button). We mark the container synchronously; a fresh
+		// container from a modal rebuild does not carry the flag, so rebuilds work.
+		var el = document.getElementById(player_id);
+		if (!el || el.getAttribute('data-iv-embedded') === '1') {
+			return;
+		}
+		el.setAttribute('data-iv-embedded', '1');
+
 		// Reveal the real player container and remove the consent overlay.
 		$('#iv_youtube_consent_' + player_id).addClass('iv_youtube_consent_hidden');
 		$('.iv_metadata[data-plyr-player-id="' + player_id + '"]').removeClass('iv_youtube_consent_hidden');
 
 		il.InteractiveVideoPlayerFunction.appendInteractionEvents(player_id);
 		var player   = null,
-			seekTime = 0,
 			interval = null;
 		il.InteractiveVideo.last_stopPoint = -1;
 		player =  new Plyr('#' + player_id, plyr_global_config);

@@ -4,6 +4,9 @@
    button is shown first; only after the user agrees is the player loaded in place
    (no reload). Consent is stored per browser (localStorage) and applies to all
    YouTube videos. No request reaches YouTube/Google before consent.
+2. Hardening of the YouTube consent flow: guard against double player
+   initialisation (double-click), null-safe currentTime accessor, and cleanup
+   of the consent overlay in the tutor comment/marker/chapter modals.
 
 # 3.9.5
 1. Compatibility with ILIAS 9.0
