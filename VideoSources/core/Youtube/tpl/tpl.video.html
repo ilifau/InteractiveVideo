@@ -4,25 +4,29 @@
 		clear: both;
 		position: relative;
 	}
-	.ilInteractiveVideoPlayerContainer{
+
+	.ilInteractiveVideoPlayerContainer {
 		position: relative;
 		padding-bottom: 56.25%;
 		padding-top: 30px;
 		height: 0;
 		overflow: hidden;
 	}
+
 	.ilInteractiveVideoPlayerContainer iframe {
 		top: 0;
 		left: 0;
 		width: 100%;
-		padding-top:15px;
+		padding-top: 15px;
 		position: absolute;
 		border: 0;
 		height: 100%;
 	}
+
 	.ilInteractiveVideoPlayerContainer {
 		text-align: center;
 	}
+
 	/* YouTube consent ("two-click") overlay: nothing is loaded from YouTube
 	   until the user actively agrees. Keeps a 16:9 look on wide layouts but
 	   grows in height when the container gets too narrow, so the button never
@@ -30,11 +34,12 @@
 	.iv_youtube_consent {
 		display: grid;
 		width: 100%;
-		background: #1a1a1a;
+		background: #04316A;
 		color: #fff;
 		border-radius: 4px;
 		overflow: hidden;
 	}
+
 	/* Spacer reserves a 16:9 MINIMUM height; because it shares the single grid
 	   cell with the content, the row grows to whichever is taller — so the
 	   button is never clipped when the container is narrow. */
@@ -43,6 +48,7 @@
 		grid-area: 1 / 1 / 2 / 2;
 		padding-bottom: 56.25%;
 	}
+
 	.iv_youtube_consent_inner {
 		grid-area: 1 / 1 / 2 / 2;
 		align-self: center;
@@ -52,32 +58,95 @@
 		padding: 1.25em;
 		box-sizing: border-box;
 	}
+
 	.iv_youtube_consent_icon {
 		font-size: 3em;
 		line-height: 1;
 		margin-bottom: .3em;
 		opacity: .85;
 	}
+
+	.iv_youtube_consent_icon svg {
+		display: block;
+		margin: 0 auto;
+	}
+
 	.iv_youtube_consent_title {
 		font-size: 1.25em;
 		font-weight: bold;
 		margin-bottom: .5em;
 	}
+
 	.iv_youtube_consent_text {
 		font-size: .95em;
 		line-height: 1.45;
 		margin-bottom: 1.2em;
 		opacity: .9;
 	}
-	.iv_youtube_consent_text a { color: #8ab4f8; }
-	.iv_youtube_consent_hidden { display: none !important; }
+
+	.iv_youtube_consent_text a {
+		color: #8ab4f8;
+	}
+
+	/* White button with #04316A label, overriding Bootstrap's btn-primary.
+	   Raised "3D" look with a solid bottom ledge + drop shadow so it clearly
+	   reads as clickable; presses down on :active. */
+	.iv_youtube_consent_btn.btn,
+	.iv_youtube_consent_btn.btn-primary {
+		background: #fff;
+		border: 1px solid #cdd6e4;
+		color: #04316A;
+		font-weight: bold;
+		padding: .6em 1.5em;
+		border-radius: 6px;
+		cursor: pointer;
+		box-shadow: 0 3px 0 rgba(255, 255, 255, .55), 0 4px 12px rgba(255, 255, 255, .35);
+		transition: transform .06s ease, box-shadow .06s ease, background .12s ease;
+	}
+
+	.iv_youtube_consent_btn.btn:hover,
+	.iv_youtube_consent_btn.btn:focus {
+		background: #eef3fb;
+		border-color: #cdd6e4;
+		color: #04316A;
+		box-shadow: 0 3px 0 rgba(255, 255, 255, .6), 0 6px 18px rgba(0, 0, 0, .45);
+	}
+
+	.iv_youtube_consent_btn.btn:focus-visible {
+		outline: 3px solid #8ab4f8;
+		outline-offset: 2px;
+	}
+
+	.iv_youtube_consent_btn.btn:active {
+		background: #e6ecf6;
+		color: #04316A;
+		transform: translateY(2px);
+		box-shadow: 0 1px 0 rgba(255, 255, 255, .55), 0 2px 6px rgba(255, 255, 255, .3);
+	}
+
+	.iv_youtube_consent_hidden {
+		display: none !important;
+	}
+
 	/* Very narrow containers: drop the icon and tighten spacing so the
 	   notice + button stay compact. */
 	@media (max-width: 480px) {
-		.iv_youtube_consent_icon { display: none; }
-		.iv_youtube_consent_inner { padding: 1em; }
-		.iv_youtube_consent_title { font-size: 1.1em; }
-		.iv_youtube_consent_text { font-size: .9em; margin-bottom: 1em; }
+		.iv_youtube_consent_icon {
+			display: none;
+		}
+
+		.iv_youtube_consent_inner {
+			padding: 1em;
+		}
+
+		.iv_youtube_consent_title {
+			font-size: 1.1em;
+		}
+
+		.iv_youtube_consent_text {
+			font-size: .9em;
+			margin-bottom: 1em;
+		}
 	}
 </style>
 <script>
@@ -88,14 +157,22 @@
 	<div id="ilInteractiveVideoTag"></div>
 	<div id="iv_youtube_consent_{PLAYER_ID}" class="iv_youtube_consent" data-consent-player="{PLAYER_ID}">
 		<div class="iv_youtube_consent_inner">
-			<div class="iv_youtube_consent_icon" aria-hidden="true">&#9658;</div>
+			<div class="iv_youtube_consent_icon" aria-hidden="true">
+				<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"
+					stroke-linecap="round" stroke-linejoin="round">
+					<path d="M12 2 4 5v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V5l-8-3z" />
+					<path d="m9 12 2 2 4-4" />
+				</svg>
+			</div>
 			<div class="iv_youtube_consent_title">{CONSENT_TITLE}</div>
 			<div class="iv_youtube_consent_text">{CONSENT_TEXT}</div>
-			<button type="button" class="btn btn-primary iv_youtube_consent_btn" data-consent-player="{PLAYER_ID}">{CONSENT_BUTTON}</button>
+			<button type="button" class="btn btn-primary iv_youtube_consent_btn"
+				data-consent-player="{PLAYER_ID}">{CONSENT_BUTTON}</button>
 		</div>
 	</div>
 	<div class="iv_metadata iv_youtube_consent_hidden" data-plyr-player-id="{PLAYER_ID}">
-		<div id="{PLAYER_ID}" class="ilInteractiveVideo" data-plyr-provider="youtube" data-plyr-embed-id="{YOUTUBE_ID}"></div>
+		<div id="{PLAYER_ID}" class="ilInteractiveVideo" data-plyr-provider="youtube" data-plyr-embed-id="{YOUTUBE_ID}">
+		</div>
 	</div>
 
 </div>
